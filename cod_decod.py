@@ -45,10 +45,17 @@ class Window_Code(QMainWindow):
 
 
     def table_code(self):
-        self.tableWidget.setColumnCount(len(self.code_table))
+        self.tableWidget.setColumnCount(8)
+        keys_code_table = list(self.code_table.keys())
+        self.tableWidget.setRowCount(2)
         for i in range(len(self.code_table)):
-            #self.tableWidget.setItem(0, i, QTableWidgetItem(str(self.code_table[i].key())))
-            print(self.code_table[i])
+            ggg = QTableWidgetItem(keys_code_table[i])
+            self.tableWidget.setItem(0, i, QTableWidgetItem(keys_code_table[i]))
+            print(ggg)
+            #self.tableWidget.setItem(1, i, QTableWidgetItem(str(self.code_table[i])))
+            print(self.code_table[keys_code_table[i]])
+
+
 
 
 

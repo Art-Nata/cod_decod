@@ -17,9 +17,9 @@ class Window_Code(QMainWindow):
         self.tableWidget.itemChanged.connect(self.item_changed)
         self.tree_btn.clicked.connect(self.tree_code)
 
-
-        self.code_table = {
-            'А': '0', 'Б': '00', 'В': '1', 'Г': '11', 'Д': '000'}
+        self.code_table = [['А', 'Б', 'В', 'Г', 'Д', '', ''],
+                           ['0', '00', '1', '11', '000', '', '']
+                           ]
         self.table_code()
 
     def cod_mess(self):
@@ -29,34 +29,28 @@ class Window_Code(QMainWindow):
             message_cod += self.code_table[i.upper()]
         self.lineEdit_2.setText(message_cod)
 
-
     def item_changed(self, item):
         # Если значение в ячейке было изменено,
 
         self.code_table[self.titles[item.column()]] = item.text()
 
-
     def decod_mess(self):
         pass
-
 
     def tree_code(self):
         pass
 
-
     def table_code(self):
-        self.tableWidget.setColumnCount(8)
-        keys_code_table = list(self.code_table.keys())
+        self.tableWidget.setColumnCount(7)
         self.tableWidget.setRowCount(2)
-        for i in range(len(self.code_table)):
-            ggg = QTableWidgetItem(keys_code_table[i])
-            self.tableWidget.setItem(0, i, QTableWidgetItem(keys_code_table[i]))
-            print(ggg)
-            #self.tableWidget.setItem(1, i, QTableWidgetItem(str(self.code_table[i])))
-            print(self.code_table[keys_code_table[i]])
+        for i in range(7):
+            print(self.code_table[0][i])
+            ggg = QTableWidgetItem(str(self.code_table[0][i]))
+            #self.tableWidget.setItem(0, i, ggg)
 
-
-
+            # self.tableWidget.setItem(1, i, QTableWidgetItem(str(self.code_table[i])))
+            #print(self.code_table[keys_code_table[i]])
+        #self.tableWidget.setItem(0, 0, QTableWidgetItem(str(0)))
 
 
 if __name__ == '__main__':

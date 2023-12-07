@@ -9,8 +9,8 @@ i = 0
 t = ''
 while i < len(code_line):
     t += code_line[i]
-    if t in CODE_TABLE:
-        text_line += t
+    if t in CODE_TABLE[1]:
+        text_line += CODE_TABLE[0][CODE_TABLE[1].index(t)]
     else:
         i += 1
 print(text_line)

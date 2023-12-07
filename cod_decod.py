@@ -8,19 +8,21 @@ def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
 
 
+CODE_TABLE = [['А', 'Б', 'В', 'Г', 'Д', '', ''], ['0', '00', '1', '11', '000', '', '']
+              ]
+
+
 class Window_Code(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('cod_decod.ui', self)
+        self.tableWidget.setColumnCount(7)
+        self.tableWidget.setRowCount(2)
         self.cod_button.clicked.connect(self.cod_mess)
         self.decod_button.clicked.connect(self.decod_mess)
-        self.tableWidget.itemChanged.connect(self.item_changed)
         self.tree_btn.clicked.connect(self.tree_code)
-
-        self.code_table = [['А', 'Б', 'В', 'Г', 'Д', '', ''],
-                           ['0', '00', '1', '11', '000', '', '']
-                           ]
         self.table_code()
+        self.tableWidget.itemChanged.connect(self.item_changed)
 
     def cod_mess(self):
         message_new = self.lineEdit.text()
@@ -30,9 +32,7 @@ class Window_Code(QMainWindow):
         self.lineEdit_2.setText(message_cod)
 
     def item_changed(self, item):
-        # Если значение в ячейке было изменено,
-
-        self.code_table[self.titles[item.column()]] = item.text()
+        pass
 
     def decod_mess(self):
         pass
@@ -41,16 +41,10 @@ class Window_Code(QMainWindow):
         pass
 
     def table_code(self):
-        self.tableWidget.setColumnCount(7)
-        self.tableWidget.setRowCount(2)
-        for i in range(7):
-            print(self.code_table[0][i])
-            ggg = QTableWidgetItem(str(self.code_table[0][i]))
-            #self.tableWidget.setItem(0, i, ggg)
 
-            # self.tableWidget.setItem(1, i, QTableWidgetItem(str(self.code_table[i])))
-            #print(self.code_table[keys_code_table[i]])
-        #self.tableWidget.setItem(0, 0, QTableWidgetItem(str(0)))
+        for i in range(7):
+            self.tableWidget.setItem(0, i, QTableWidgetItem(str(CODE_TABLE[0][i])))
+            self.tableWidget.setItem(1, i, QTableWidgetItem(str(CODE_TABLE[1][i])))
 
 
 if __name__ == '__main__':

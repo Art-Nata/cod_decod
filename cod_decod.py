@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QApplication
 
 
 def except_hook(cls, exception, traceback):
@@ -10,6 +10,24 @@ def except_hook(cls, exception, traceback):
 
 CODE_TABLE = [['А', 'Б', 'В', 'Г', 'Д', '', ''], ['0', '00', '1', '11', '000', '', '']
               ]
+
+
+def phano(codes):
+    for i, c1 in enumerate(codes):
+        for j, c2 in enumerate(codes):
+            if i != j:
+                if c1.startswith(c2) or c2.startswith(c1):
+                    return False
+    return True
+
+
+def revphano(codes):
+    for i, c1 in enumerate(codes):
+        for j, c2 in enumerate(codes):
+            if i != j:
+                if c1.endswith(c2) or c2.endswith(c1):
+                    return False
+    return True
 
 
 class Window_Code(QMainWindow):
@@ -35,7 +53,7 @@ class Window_Code(QMainWindow):
         pass
 
     def decod_mess(self):
-        pass
+        code_new = self.lineEdit_2.text()
 
     def tree_code(self):
         pass

@@ -28,7 +28,7 @@ class Window_Code(QMainWindow):
         message_new = self.lineEdit.text()
         message_cod = ''
         for i in message_new:
-            message_cod += self.code_table[i.upper()]
+            message_cod += CODE_TABLE[1][CODE_TABLE[0].index(i.capitalize())]
         self.lineEdit_2.setText(message_cod)
 
     def item_changed(self, item):

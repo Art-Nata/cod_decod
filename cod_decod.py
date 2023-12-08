@@ -1,14 +1,14 @@
 import sys
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QApplication
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QApplication, QWidget
 
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
 
 
-CODE_TABLE = [['А', 'Б', 'В', 'Г', 'Д', '', ''], ['0', '00', '1', '11', '000', '', '']
+CODE_TABLE = [['А', 'Б', 'В', 'Г', 'Д', '', ''], ['101', '00', '1001', '110', '1110', '', '']
               ]
 
 
@@ -38,9 +38,11 @@ class Window_Code(QMainWindow):
         self.tableWidget.setRowCount(2)
         self.cod_button.clicked.connect(self.cod_mess)
         self.decod_button.clicked.connect(self.decod_mess)
-        self.tree_btn.clicked.connect(self.tree_code)
+
         self.table_code()
         self.tableWidget.itemChanged.connect(self.item_changed)
+
+        self.tree_btn.clicked.connect(self.tree_code)
 
     def cod_mess(self):
         try:
@@ -59,13 +61,33 @@ class Window_Code(QMainWindow):
         code_new = self.lineEdit_2.text()
 
     def tree_code(self):
-        pass
+        self.wnd_tree = Window_tree()
+        self.wnd_tree.show()
+
 
     def table_code(self):
 
         for i in range(7):
             self.tableWidget.setItem(0, i, QTableWidgetItem(str(CODE_TABLE[0][i])))
             self.tableWidget.setItem(1, i, QTableWidgetItem(str(CODE_TABLE[1][i])))
+
+class Window_tree(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('window_tree.ui', self)
+        self.message_phano()
+
+    def message_phano(self):
+        b = [x for x in CODE_TABLE[1] if x]
+        if phano(b):
+            self.label_2.setText('Прямое  +')
+        else:
+            self.label_2.setText('Прямое  -')
+        if revphano(CODE_TABLE[1]):
+            self.label_3.setText('Обратное  +')
+        else:
+            self.label_3.setText('Обратное  -')
+
 
 
 if __name__ == '__main__':

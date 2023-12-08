@@ -64,12 +64,12 @@ class Window_Code(QMainWindow):
         self.wnd_tree = Window_tree()
         self.wnd_tree.show()
 
-
     def table_code(self):
 
         for i in range(7):
             self.tableWidget.setItem(0, i, QTableWidgetItem(str(CODE_TABLE[0][i])))
             self.tableWidget.setItem(1, i, QTableWidgetItem(str(CODE_TABLE[1][i])))
+
 
 class Window_tree(QWidget):
     def __init__(self):
@@ -87,7 +87,6 @@ class Window_tree(QWidget):
             self.label_3.setText('Обратное  +')
         else:
             self.label_3.setText('Обратное  -')
-
 
 
 if __name__ == '__main__':

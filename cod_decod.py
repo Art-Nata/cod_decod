@@ -43,11 +43,14 @@ class Window_Code(QMainWindow):
         self.tableWidget.itemChanged.connect(self.item_changed)
 
     def cod_mess(self):
-        message_new = self.lineEdit.text()
-        message_cod = ''
-        for i in message_new:
-            message_cod += CODE_TABLE[1][CODE_TABLE[0].index(i.capitalize())]
-        self.lineEdit_2.setText(message_cod)
+        try:
+            message_new = self.lineEdit.text()
+            message_cod = ''
+            for i in message_new:
+                message_cod += CODE_TABLE[1][CODE_TABLE[0].index(i.capitalize())]
+            self.lineEdit_2.setText(message_cod)
+        except ValueError:
+            self.statusBar().showMessage('Неправильное сообщение')
 
     def item_changed(self, item):
         pass

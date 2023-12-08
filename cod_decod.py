@@ -53,7 +53,7 @@ class Window_Code(QMainWindow):
             self.statusBar().showMessage('Неправильное сообщение')
 
     def item_changed(self, item):
-        pass
+        CODE_TABLE[item.row()][item.column()] = item.text()
 
     def decod_mess(self):
         code_new = self.lineEdit_2.text()

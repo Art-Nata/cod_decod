@@ -1,6 +1,7 @@
 import sys
 
 from PyQt5 import uic
+from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QApplication, QWidget
 
 
@@ -87,6 +88,28 @@ class Window_tree(QWidget):
             self.label_3.setText('Обратное  +')
         else:
             self.label_3.setText('Обратное  -')
+
+    def paintEvent(self, event):
+
+        # Создаем объект QPainter для рисования
+        qp = QPainter()
+        # Начинаем процесс рисования
+        qp.begin(self)
+        self.draw_tree(qp)
+        qp.end()
+
+    def draw_tree(self, qp):
+        self.w = self.size().width()
+        self.h = self.size().height()
+        x, y = self.w // 2, 20
+        step_y =
+        h = max(list(map(len, CODE_TABLE[1])))
+        for i in range(h):
+            x_end = x_start - x_start // 2 * i + 10
+            qp.drawLine(x, y, x_end, y + (self.h - 120) // 4)
+
+
+
 
 
 if __name__ == '__main__':
